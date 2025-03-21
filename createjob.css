@@ -1,0 +1,76 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+.add-address {
+    text-align: right;
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.add-address:hover {
+    text-decoration: underline;
+}
+
+/* Next Button */
+.next-btn {
+    background: #6a0dad;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+.next-btn:hover {
+    background: #5a0cb2;
+}
+
+/* Step Completion Effect */
+.completed {
+    background: #6a0dad !important;
+}
+
+.completed + .line {
+    background: #6a0dad !important;
+}

@@ -1,0 +1,145 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+}
+
+/* Step Progress Bar */
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.step {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #777;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.step.active {
+    background: #6a0dad;
+    color: white;
+}
+
+.step.completed {
+    background: #6a0dad;
+    color: white;
+}
+
+.line {
+    width: 50px;
+    height: 4px;
+    background: #e0e0e0;
+    transition: background 0.3s;
+}
+
+.line.active {
+    background: #6a0dad;
+}
+
+.line.completed {
+    background: #6a0dad;
+}
+
+/* Form Styles */
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.back-btn, .publish-btn {
+    font-size: 16px;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.back-btn {
+    background: white;
+    color: #6a0dad;
+    border: 2px solid #6a0dad;
+}
+
+.back-btn:hover {
+    background: #6a0dad;
+    color: white;
+}
+
+.publish-btn {
+    background: linear-gradient(to right, #6a0dad, #007bff);
+    color: white;
+}
+
+.publish-btn:hover {
+    background: linear-gradient(to right, #5a0cb2, #0056b3);
+}
+
+/* Terms & Conditions */
+.terms {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    color: gray;
+}
+
+.terms a {
+    color: #6a0dad;
+    text-decoration: none;
+}

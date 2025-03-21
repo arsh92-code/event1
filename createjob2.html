@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gig Details - Step 3</title>
+    <link rel="stylesheet" href="createjob.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Step Progress Bar -->
+        <div class="progress-container">
+            <div class="step completed">1</div>
+            <div class="line completed"></div>
+            <div class="step completed">2</div>
+            <div class="line active"></div>
+            <div class="step active">3</div>
+        </div>
+
+        <!-- Form Section -->
+        <h2 class="form-title">Gig Details</h2>
+        <form id="gigForm">
+            <div class="form-group">
+                <label for="pay">Pay per hour</label>
+                <input type="number" id="pay" placeholder="Type Here" required>
+            </div>
+
+            <div class="form-group">
+                <label for="vacancies">No. of vacancies</label>
+                <input type="number" id="vacancies" placeholder="Type here..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="start-date">Start date</label>
+                <input type="date" id="start-date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="end-date">End date</label>
+                <input type="date" id="end-date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="start-time">Start time</label>
+                <select id="start-time" required>
+                    <option value="">Choose an option...</option>
+                    <option value="08:00">08:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="end-time">End time</label>
+                <select id="end-time" required>
+                    <option value="">Choose an option...</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                    <option value="18:00">06:00 PM</option>
+                    <option value="20:00">08:00 PM</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gig-description">Gig Description</label>
+                <textarea id="gig-description" placeholder="Type here..." required></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="back-btn">Back</button>
+                <button type="submit" class="publish-btn">Publish</button>
+            </div>
+        </form>
+
+        <p class="terms">By clicking Publish, you agree that this job post reflects your requirements, and agree to Just Gig's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>document.addEventListener("DOMContentLoaded", function () {
+    const steps = document.querySelectorAll(".step");
+    const form = document.getElementById("gigForm");
+    const backBtn = document.querySelector(".back-btn");
+    const publishBtn = document.querySelector(".publish-btn");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Simple Form Validation
+        const pay = document.getElementById("pay").value;
+        const vacancies = document.getElementById("vacancies").value;
+        const startDate = document.getElementById("start-date").value;
+        const endDate = document.getElementById("end-date").value;
+        const startTime = document.getElementById("start-time").value;
+        const endTime = document.getElementById("end-time").value;
+        const gigDescription = document.getElementById("gig-description").value;
+
+        if (!pay || !vacancies || !startDate || !endDate || !startTime || !endTime || !gigDescription) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        alert("Gig successfully published!");
+        window.location.href = "success.html"; // Redirect to success page
+    });
+
+    backBtn.addEventListener("click", function () {
+        window.location.href = "step2.html"; // Navigate to previous step
+    });
+});
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gig Creation Form</title>
+    <link rel="stylesheet" href='createjob.css'>
+</head>
+<body>
+   
+
+        <!-- Form Section -->
+        <form id="gigForm">
+            <label for="role">Roles</label>
+            <select id="role" required>
+                <option value="">Select a Role</option>
+                <option value="Host">Host</option>
+                <option value="Waiter">Waiter</option>
+                <option value="Bartender">Bartender</option>
+            </select>
+
+            <label for="location">Location</label>
+            <select id="location" required>
+                <option value="">Choose a unit</option>
+                <option value="NYC">New York</option>
+                <option value="LA">Los Angeles</option>
+            </select>
+            <a href="#" class="add-address">add a new address</a>
+
+            <label for="paymentWait">Estimated Payment Wait Time</label>
+            <select id="paymentWait" required>
+                <option value="">Select an option</option>
+                <option value="7">7 Days</option>
+                <option value="14">14 Days</option>
+            </select>
+          <button type="submit" class="next-btn"><a href="createjob1.html">Next</button></a>
+            <button type="submit" class="next-btn">Back</button>
+        </form>
+    </div>
+
+    
+</body>
+</html>
+
+    <script>document.addEventListener("DOMContentLoaded", function () {
+        const steps = document.querySelectorAll(".step");
+        const form = document.getElementById("gigForm");
+        const nextBtn = document.querySelector(".next-btn");
+    
+        nextBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            
+            // Simple Form Validation
+            const role = document.getElementById("role").value;
+            const location = document.getElementById("location").value;
+            const paymentWait = document.getElementById("paymentWait").value;
+    
+            if (!role || !location || !paymentWait) {
+                alert("Please fill in all fields before proceeding.");
+                return;
+            }
+    
+            // Update Progress Bar
+            steps[0].classList.add("completed");
+
+    
+            // Here you can add logic to move to the next form step
+            
+        });
+    });
+    </script>

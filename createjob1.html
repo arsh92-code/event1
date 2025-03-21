@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grooming Requirements</title>
+    <link rel="stylesheet" href="createjob.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Step Progress Bar -->
+        <div class="progress-container">
+            <div class="step completed">1</div>
+            <div class="line active"></div>
+            <div class="step active">2</div>
+            <div class="line"></div>
+            <div class="step">3</div>
+        </div>
+
+        <!-- Form Section -->
+        <h2 class="form-title">Grooming</h2>
+        <form id="groomingForm">
+            <label for="top">Top</label>
+            <select id="top" required>
+                <option value="">Choose an option...</option>
+                <option value="Shirt">Shirt</option>
+                <option value="T-shirt">T-shirt</option>
+                <option value="Blazer">Blazer</option>
+            </select>
+
+            <label for="bottom">Bottom</label>
+            <select id="bottom" required>
+                <option value="">Choose an option...</option>
+                <option value="Jeans">Jeans</option>
+                <option value="Trousers">Trousers</option>
+                <option value="Shorts">Shorts</option>
+            </select>
+
+            <label for="shoes">Shoes</label>
+            <select id="shoes" required>
+                <option value="">Choose an option...</option>
+                <option value="Formal">Formal</option>
+                <option value="Casual">Casual</option>
+                <option value="Sneakers">Sneakers</option>
+            </select>
+
+            <label for="hair">Hair and Moustache</label>
+            <select id="hair" required>
+                <option value="">Choose an option...</option>
+                <option value="Clean Shaved">Clean Shaved</option>
+                <option value="Trimmed Beard">Trimmed Beard</option>
+                <option value="Long Hair">Long Hair</option>
+            </select>
+
+            <div class="button-group">
+                <button type="button" class="back-btn">Back</button>
+                <button type="submit" class="next-btn">Next</button>
+            </div>
+        </form>
+    </div>
+
+    
+</body>
+</html>
+<script>document.addEventListener("DOMContentLoaded", function () {
+    const steps = document.querySelectorAll(".step");
+    const form = document.getElementById("groomingForm");
+    const backBtn = document.querySelector(".back-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Simple Form Validation
+        const top = document.getElementById("top").value;
+        const bottom = document.getElementById("bottom").value;
+        const shoes = document.getElementById("shoes").value;
+        const hair = document.getElementById("hair").value;
+
+        if (!top || !bottom || !shoes || !hair) {
+            alert("Please select all grooming requirements.");
+            return;
+        }
+
+        // Update Progress Bar
+        steps[1].classList.add("completed");
+        steps[2].classList.add("active");
+
+        // Redirect to Next Page (Step 3)
+        window.location.href = "step3.html"; // Change this to the next step file
+    });
+
+    backBtn.addEventListener("click", function () {
+        window.location.href = "step1.html"; // Change this to the previous step file
+    });
+});
+</script>

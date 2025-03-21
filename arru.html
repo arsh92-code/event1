@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Admin Panel - User Bookings</h1>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchUsers()">
+            <button onclick="openModal()">+ Add Booking</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Booking Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <!-- User Data Will Load Here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for Adding/Editing Users -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Add Booking</h2>
+            <input type="hidden" id="editIndex">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="date" id="bookingDate" required>
+            <button onclick="saveUser()">Save</button>
+        </div>
+    </div>
+
+</body>
+</html>
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+td {
+    background: #f9f9f9;
+}
+
+.action-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+}
+
+.edit-btn {
+    background: #ffc107;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+}
+</style>
+<script>document.addEventListener("DOMContentLoaded", loadUsers);
+
+    function loadUsers() {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let table = document.getElementById("userTable");
+        table.innerHTML = "";
+        
+        users.forEach((user, index) => {
+            let row = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.bookingDate}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editUser(${index})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteUser(${index})">Delete</button>
+                    </td>
+                </tr>
+            `;
+            table.innerHTML += row;
+        });
+    }
+    
+    function openModal() {
+        document.getElementById("userModal").style.display = "flex";
+        document.getElementById("modalTitle").innerText = "Add Booking";
+        document.getElementById("editIndex").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("bookingDate").value = "";
+    }
+    
+    function closeModal() {
+        document.getElementById("userModal").style.display = "none";
+    }
+    
+    function saveUser() {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let bookingDate = document.getElementById("bookingDate").value;
+        let index = document.getElementById("editIndex").value;
+    
+        if (name && email && bookingDate) {
+            if (index === "") {
+                users.push({ name, email, bookingDate });
+            } else {
+                users[index] = { name, email, bookingDate };
+            }
+    
+            localStorage.setItem("users", JSON.stringify(users));
+            closeModal();
+            loadUsers();
+        } else {
+            alert("Please fill all fields!");
+        }
+    }
+    
+    function editUser(index) {
+        let users = JSON.parse(localStorage.getItem("users"));
+        document.getElementById("editIndex").value = index;
+        document.getElementById("name").value = users[index].name;
+        document.getElementById("email").value = users[index].email;
+        document.getElementById("bookingDate").value = users[index].bookingDate;
+        
+        document.getElementById("modalTitle").innerText = "Edit Booking";
+        document.getElementById("userModal").style.display = "flex";
+    }
+    
+    function deleteUser(index) {
+        let users = JSON.parse(localStorage.getItem("users"));
+        users.splice(index, 1);
+        localStorage.setItem("users", JSON.stringify(users));
+        loadUsers();
+    }
+    
+    function searchUsers() {
+        let filter = document.getElementById("searchInput").value.toLowerCase();
+        let rows = document.querySelectorAll("#userTable tr");
+        
+        rows.forEach(row => {
+            let name = row.children[1].innerText.toLowerCase();
+            row.style.display = name.includes(filter) ? "" : "none";
+        });
+    }
+    </script>
